@@ -1,5 +1,8 @@
 package com.praynikk.gmail.com.runtime.flows;
 
+import com.praynikk.gmail.com.runtime.Book;
+import com.praynikk.gmail.com.runtime.api.OpenAPIdefinition;
+import com.praynikk.gmail.com.runtime.api.request.BookCreate;
 import com.praynikk.gmail.com.runtime.security.UserSecurityContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,5 +16,13 @@ public class LibService {
     run(null);
   }
 
-  public void run(UserSecurityContext securityContext) {}
+  public Book run(UserSecurityContext securityContext) {
+
+    OpenAPIdefinition openapidefinition = new OpenAPIdefinition();
+
+    var createdBook1 =
+        openapidefinition.createBook(new BookCreate().setTitle("new title").setNumberOfBooks(1));
+
+    return new Book().setId("2");
+  }
 }
