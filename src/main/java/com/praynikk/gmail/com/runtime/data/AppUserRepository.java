@@ -73,12 +73,12 @@ public class AppUserRepository {
       preds.add(r.get(AppUser_.id).in(appUserFilter.getId()));
     }
 
-    if (appUserFilter.getUsername() != null && !appUserFilter.getUsername().isEmpty()) {
-      preds.add(r.get(AppUser_.username).in(appUserFilter.getUsername()));
-    }
-
     if (appUserFilter.getRoles() != null && !appUserFilter.getRoles().isEmpty()) {
       preds.add(r.get(AppUser_.roles).in(appUserFilter.getRoles()));
+    }
+
+    if (appUserFilter.getUsername() != null && !appUserFilter.getUsername().isEmpty()) {
+      preds.add(r.get(AppUser_.username).in(appUserFilter.getUsername()));
     }
   }
 
