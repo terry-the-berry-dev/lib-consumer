@@ -35,7 +35,7 @@ public class LibService {
                 .setUsername(this.libraryadminusername)
                 .setPassword(this.libraryadminpassword));
 
-    if (!(loginResponse.getStatusCode().is2xxSuccessful() != true)) {
+    if (!(loginResponse.getStatusCode().is2xxSuccessful())) {
 
       throw new org.springframework.web.server.ResponseStatusException(
           HttpStatus.OK, "Cannot login");
