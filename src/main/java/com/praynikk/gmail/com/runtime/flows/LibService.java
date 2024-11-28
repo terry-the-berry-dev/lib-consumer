@@ -25,12 +25,12 @@ public class LibService {
 
   public void run(UserSecurityContext securityContext) {
 
-    OpenAPIdefinition openapidefinition =
+    OpenAPIdefinition openApi =
         new OpenAPIdefinition()
             .setBasePath("https://library.praynikk-gmail-com-s-workspace.cluster.wizzdi.com/api");
 
     var loginResponse =
-        openapidefinition.login(
+        openApi.login(
             new LoginRequest()
                 .setUsername(this.libraryadminusername)
                 .setPassword(this.libraryadminpassword));
