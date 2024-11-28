@@ -38,7 +38,10 @@ public class LibService {
     if (!(loginResponse.getStatusCode().is2xxSuccessful())) {
 
       throw new org.springframework.web.server.ResponseStatusException(
-          HttpStatus.OK, "Cannot login");
+          HttpStatus.FORBIDDEN, "Cannot login");
     }
+
+    java.lang.String openAPIAuthToken =
+        loginResponse.getHeaders().getFirst("authorization").toString();
   }
 }
