@@ -86,20 +86,39 @@ public class OpenAPIdefinition {
         .build();
   }
 
-  public ResponseEntity<Lender> createLender(LenderCreate lenderCreate) {
+  public ResponseEntity<Book> updateBook(BookUpdate bookUpdate) {
     Map<String, Object> uriParameters = new HashMap<>();
     HttpHeaders headers = new HttpHeaders();
-    HttpMethod httpMethod = HttpMethod.POST;
-    String path = "/api/Lender/createLender";
+    HttpMethod httpMethod = HttpMethod.PUT;
+    String path = "/api/Book/updateBook";
 
     headers.setContentType(MediaType.valueOf("application/json"));
 
     final UriComponentsBuilder builder =
         UriComponentsBuilder.fromHttpUrl(basePath).path(path).uriVariables(uriParameters);
 
-    HttpEntity<LenderCreate> entity = new HttpEntity<>(lenderCreate, headers);
+    HttpEntity<BookUpdate> entity = new HttpEntity<>(bookUpdate, headers);
 
-    ParameterizedTypeReference<Lender> parameterizedTypeReference =
+    ParameterizedTypeReference<Book> parameterizedTypeReference =
+        new ParameterizedTypeReference<>() {};
+    return restTemplate.exchange(
+        builder.toUriString(), httpMethod, entity, parameterizedTypeReference);
+  }
+
+  public ResponseEntity<LenderToBook> deleteLenderToBook(String id) {
+    Map<String, Object> uriParameters = new HashMap<>();
+    HttpHeaders headers = new HttpHeaders();
+    HttpMethod httpMethod = HttpMethod.DELETE;
+    String path = "/api/LenderToBook/{id}";
+
+    uriParameters.put("id", id);
+
+    final UriComponentsBuilder builder =
+        UriComponentsBuilder.fromHttpUrl(basePath).path(path).uriVariables(uriParameters);
+
+    HttpEntity<Void> entity = new HttpEntity<>(null, headers);
+
+    ParameterizedTypeReference<LenderToBook> parameterizedTypeReference =
         new ParameterizedTypeReference<>() {};
     return restTemplate.exchange(
         builder.toUriString(), httpMethod, entity, parameterizedTypeReference);
@@ -195,25 +214,6 @@ public class OpenAPIdefinition {
     HttpEntity<LibraryCreate> entity = new HttpEntity<>(libraryCreate, headers);
 
     ParameterizedTypeReference<Library> parameterizedTypeReference =
-        new ParameterizedTypeReference<>() {};
-    return restTemplate.exchange(
-        builder.toUriString(), httpMethod, entity, parameterizedTypeReference);
-  }
-
-  public ResponseEntity<Book> updateBook(BookUpdate bookUpdate) {
-    Map<String, Object> uriParameters = new HashMap<>();
-    HttpHeaders headers = new HttpHeaders();
-    HttpMethod httpMethod = HttpMethod.PUT;
-    String path = "/api/Book/updateBook";
-
-    headers.setContentType(MediaType.valueOf("application/json"));
-
-    final UriComponentsBuilder builder =
-        UriComponentsBuilder.fromHttpUrl(basePath).path(path).uriVariables(uriParameters);
-
-    HttpEntity<BookUpdate> entity = new HttpEntity<>(bookUpdate, headers);
-
-    ParameterizedTypeReference<Book> parameterizedTypeReference =
         new ParameterizedTypeReference<>() {};
     return restTemplate.exchange(
         builder.toUriString(), httpMethod, entity, parameterizedTypeReference);
@@ -450,6 +450,25 @@ public class OpenAPIdefinition {
         builder.toUriString(), httpMethod, entity, parameterizedTypeReference);
   }
 
+  public ResponseEntity<Lender> createLender(LenderCreate lenderCreate) {
+    Map<String, Object> uriParameters = new HashMap<>();
+    HttpHeaders headers = new HttpHeaders();
+    HttpMethod httpMethod = HttpMethod.POST;
+    String path = "/api/Lender/createLender";
+
+    headers.setContentType(MediaType.valueOf("application/json"));
+
+    final UriComponentsBuilder builder =
+        UriComponentsBuilder.fromHttpUrl(basePath).path(path).uriVariables(uriParameters);
+
+    HttpEntity<LenderCreate> entity = new HttpEntity<>(lenderCreate, headers);
+
+    ParameterizedTypeReference<Lender> parameterizedTypeReference =
+        new ParameterizedTypeReference<>() {};
+    return restTemplate.exchange(
+        builder.toUriString(), httpMethod, entity, parameterizedTypeReference);
+  }
+
   public ResponseEntity<AppUser> deleteAppUser(String id) {
     Map<String, Object> uriParameters = new HashMap<>();
     HttpHeaders headers = new HttpHeaders();
@@ -560,25 +579,6 @@ public class OpenAPIdefinition {
     HttpEntity<LenderUpdate> entity = new HttpEntity<>(lenderUpdate, headers);
 
     ParameterizedTypeReference<Lender> parameterizedTypeReference =
-        new ParameterizedTypeReference<>() {};
-    return restTemplate.exchange(
-        builder.toUriString(), httpMethod, entity, parameterizedTypeReference);
-  }
-
-  public ResponseEntity<LenderToBook> deleteLenderToBook(String id) {
-    Map<String, Object> uriParameters = new HashMap<>();
-    HttpHeaders headers = new HttpHeaders();
-    HttpMethod httpMethod = HttpMethod.DELETE;
-    String path = "/api/LenderToBook/{id}";
-
-    uriParameters.put("id", id);
-
-    final UriComponentsBuilder builder =
-        UriComponentsBuilder.fromHttpUrl(basePath).path(path).uriVariables(uriParameters);
-
-    HttpEntity<Void> entity = new HttpEntity<>(null, headers);
-
-    ParameterizedTypeReference<LenderToBook> parameterizedTypeReference =
         new ParameterizedTypeReference<>() {};
     return restTemplate.exchange(
         builder.toUriString(), httpMethod, entity, parameterizedTypeReference);

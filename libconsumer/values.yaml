@@ -8,7 +8,7 @@ image:
   repository: harbor.manage.cluster.wizzdi.com/praynikk-gmail-com-s-workspace/libconsumer
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.9"
+  tag: "0.0.10"
 
 imagePullSecrets:
 - name: regcred
@@ -58,9 +58,20 @@ probes:
       path: /swagger-ui/index.html
       port: 8080
 
+secrets:
+  library-admin-password:
+    name: library-admin-password
+    data:
+      library-admin-password: ""
+
 env:
   - name: SPRING_DATASOURCE_URL
     value: jdbc:postgresql://libconsumer-postgresql:5432/flexicore
+  - name: LIBRARY_ADMIN_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: library-admin-password
+        key:  library-admin-password
 
 ingress:
   enabled: true
